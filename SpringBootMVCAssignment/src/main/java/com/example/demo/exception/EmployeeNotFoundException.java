@@ -1,28 +1,17 @@
 package com.example.demo.exception;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.client.HttpStatusCodeException;
 
-@ResponseStatus(value=HttpStatus.NOT_FOUND)
-public class EmployeeNotFoundException extends RuntimeException{
+public class EmployeeNotFoundException extends HttpStatusCodeException{
 
 	private static final long serialVersionUID = 1L;
-	
-	private String exceptionDetail;
-	private Object fieldValue;
-	
-	public EmployeeNotFoundException(String exceptionDetail, Long fieldValue) {
-		super(exceptionDetail+"-"+fieldValue);
-		this.exceptionDetail=exceptionDetail;
-		this.fieldValue=fieldValue;
+
+	public EmployeeNotFoundException() {
+		super(HttpStatus.NOT_FOUND);
+		
 	}
-	
-	public String getExceptionDetail() {
-		return exceptionDetail;
+	public EmployeeNotFoundException(String message) {
+		super(HttpStatus.NOT_FOUND,message);
 	}
-	
-	public Object getFieldValue() {
-		return fieldValue;
-	}
-	
 }

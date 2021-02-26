@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import java.io.Serializable;
 
+
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
@@ -13,7 +14,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+
 
 @Entity
 @Table(name="EMPLOYEE")
@@ -22,9 +23,9 @@ public class EmployeeEntity implements Serializable{
 	private static final long serialVersionUID=1L;
 	
 	@Id
-	@Min(1)
+	@Min(value=1)
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
+	private int id;
 	
 	@NotNull
 	@Pattern(regexp="^[a-zA-Z]{1,20}$",message = "Name must be alphanumeric")
@@ -35,25 +36,30 @@ public class EmployeeEntity implements Serializable{
 	@Min(value=10000000,message ="Account number must be greater than equal to 100000000")
 	@Max(value=999999999,message="Account number must be less than equal to 999999999")
 	@Column(name="accountNo",nullable = false)
-	private Long accountNo;
+	private int accountNo;
 	
 	
 	public EmployeeEntity() {
 		super();
 	}
 	
-	public EmployeeEntity(Long id, String name, Long accountNo) {
+	public EmployeeEntity(String name, int accountNo) {
+		this.name = name;
+		this.accountNo = accountNo;
+	}
+	
+	public EmployeeEntity(int id, String name, int accountNo) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.accountNo = accountNo;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -65,11 +71,11 @@ public class EmployeeEntity implements Serializable{
 		this.name = name;
 	}
 
-	public Long getAccountNo() {
+	public int getAccountNo() {
 		return accountNo;
 	}
 
-	public void setAccountNo(Long accountNo) {
+	public void setAccountNo(int accountNo) {
 		this.accountNo = accountNo;
 	}
 		
